@@ -4,11 +4,11 @@ using Telegram.Bot.Types.Enums;
 
 namespace GitHubLinkBot.Services;
 
-public class ConfigureWebhook : IHostedService
+public class ConfigureTelegramWebhook : IHostedService
 {
     private readonly BotConfig _botConfig;
     private readonly IServiceProvider _services;
-    public ConfigureWebhook(IConfiguration config, IServiceProvider services)
+    public ConfigureTelegramWebhook(IConfiguration config, IServiceProvider services)
     {
         _services = services;
         _botConfig = config.GetSection("BotConfiguration").Get<BotConfig>();
@@ -20,7 +20,7 @@ public class ConfigureWebhook : IHostedService
         var botClient = scope.ServiceProvider.GetRequiredService<ITelegramBotClient>();
         
         var webhookAddress = @$"{_botConfig.BotHostAddress}/bot/{_botConfig.BotToken}";
-        Console.WriteLine($"Setting webhook: {webhookAddress}");
+        Console.WriteLine("Setting webhook");
         await botClient.SetWebhookAsync(
             url: webhookAddress,
             allowedUpdates: new List<UpdateType>
