@@ -60,7 +60,7 @@ public class PostTelegramUpdate : Endpoint<Update>
                 
                 // not awaiting because it's unnecessary and if there's more than 1 issue number it will get to adding
                 //  the next link faster
-                _ = TelegramClient.SendTextMessageAsync(req.Message!.Chat.Id, gIssue.HtmlUrl, cancellationToken:ct);
+                _ = TelegramClient.SendTextMessageAsync(req.Message!.Chat.Id, gIssue.HtmlUrl, disableNotification:true, cancellationToken:ct);
             }
             catch (NotFoundException) {} // issue not found on GH
             catch (Exception e)
