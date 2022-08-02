@@ -22,6 +22,8 @@ builder.Services.AddHttpClient("tg").AddTypedClient<ITelegramBotClient>(client =
 
 var app = builder.Build();
 
+app.MapGet("/site-status", () => "Site is working");
+
 app.UseFastEndpoints(config =>
 {
     // set up for Newtonsoft serializer because Telegram does not yet support the current default System.Text.Json
